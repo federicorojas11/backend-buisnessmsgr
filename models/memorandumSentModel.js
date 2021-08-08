@@ -21,10 +21,10 @@ const MemorandumRecModel = sequelizeConnection.define(
       allowNull: true,
       field: "message",
     },
-    sender_id: {
+    receiver_id: {
       type: Sequelize.INTEGER,
       allowNull: true,
-      field: "sender_id",
+      field: "receiver_id",
     },
     time: {
       type: Sequelize.DATE,
