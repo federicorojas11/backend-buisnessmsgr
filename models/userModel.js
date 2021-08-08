@@ -1,36 +1,54 @@
-const Sequelize = require('sequelize')
-const { sequelizeConnection } = require('../config/server/sequelizeConfig')
+const Sequelize = require("sequelize");
+const { sequelizeConnection } = require("../config/server/sequelizeConfig");
 
 const UserModel = sequelizeConnection.define(
-  'user',
+  "user",
   {
     id: {
       type: Sequelize.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     userName: {
       type: Sequelize.STRING,
       allowNull: false,
-      field: 'user_name'
+      field: "user_name",
     },
     password: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
+    },
+    firstName: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    lastName: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    city: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      field: "city",
+    },
+    country: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      field: "country",
     },
     createdAt: {
       type: Sequelize.DATE,
-      field: 'created_at'
+      field: "created_at",
     },
     updatedAt: {
       type: Sequelize.DATE,
-      field: 'updated_at'
-    }
+      field: "updated_at",
+    },
   },
   {
-    tableName: 'user',
-    timestamps: true
+    tableName: "user",
+    timestamps: true,
   }
-)
-module.exports = UserModel
+);
+module.exports = UserModel;

@@ -1,0 +1,56 @@
+CREATE TABLE memorandumReceived 
+
+	(
+		ID INT AUTO_INCREMENT PRIMARY KEY, 
+		TITLE VARCHAR(50) NOT NULL, 
+		MESSAGE VARCHAR(144) NOT NULL, 
+		SENDER_ID INT NOT NULL, 
+		TIME DATETIME NOT NULL, 
+		READED TINYINT(1) NOT NULL
+	);
+	
+	
+	
+CREATE TABLE memorandumSent 
+
+	(
+		ID INT AUTO_INCREMENT PRIMARY KEY, 
+		TITLE VARCHAR(50) NOT NULL, 
+		MESSAGE VARCHAR(144) NOT NULL, 
+		RECEIVER_ID INT NOT NULL, 
+		TIME DATETIME NOT NULL
+	);
+	
+CREATE TABLE memorandum
+
+	(
+		ID INT AUTO_INCREMENT PRIMARY KEY, 
+		TITLE VARCHAR(50) NOT NULL, 
+		MESSAGE VARCHAR(144) NOT NULL, 
+		SENDER_ID INT NOT NULL, 
+		SENDER_DEL_STATUS TINYINT(1) NOT NULL,
+		RECEIVER_ID INT NOT NULL,
+		RECEIVER_DEL_STATUS TINYINT(1) NOT NULL,
+		TIME DATETIME NOT NULL, 
+		READED TINYINT(1) NOT NULL
+	);
+
+CREATE TABLE user
+
+	(
+		ID INT AUTO_INCREMENT PRIMARY KEY, 
+		USERNAME VARCHAR(22) NOT NULL, 
+		PASSWORD CHAR(60) NOT NULL, 
+		FIRSTNAME VARCHAR(50) NOT NULL,
+		LASTNAME VARCHAR(50) NOT NULL,
+		COUNTRY_ID CHAR(2) NOT NULL, 
+		CITY 
+	);
+	
+	
+INSERT INTO `memorandumReceived` (`title`,`message`,`receiver_id`,`time`) VALUES ("Nec Ligula Corp.","Ut semper pretium neque. Morbi quis urna. Nunc quis arcu",7,"2022-03-18 04:22:38"),("Magna Lorem Ipsum Consulting","a, auctor non, feugiat nec, diam. Duis mi enim, condimentum",7,"2021-12-29 17:43:38"),("Mauris Sagittis PC","purus gravida sagittis. Duis gravida. Praesent eu nulla at sem",8,"2022-08-06 19:06:25"),("Felis Donec Tempor Consulting","ipsum primis in faucibus orci luctus et ultrices posuere cubilia",3,"2021-06-21 02:36:35"),("Lectus Cum Associates","gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa",6,"2021-09-04 09:20:28"),("Nulla Facilisi Sed Inc.","Fusce feugiat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",9,"2022-01-11 12:38:50"),("Donec Nibh Ltd","Sed pharetra, felis eget varius ultrices, mauris ipsum porta elit,",1,"2020-08-25 23:03:41"),("Eros PC","Praesent luctus. Curabitur egestas nunc sed libero. Proin sed turpis",9,"2021-04-03 21:59:22"),("Neque In LLC","mauris a nunc. In at pede. Cras vulputate velit eu",10,"2021-08-04 04:21:04"),("Mauris LLP","Integer eu lacus. Quisque imperdiet, erat nonummy ultricies ornare, elit",1,"2021-07-19 07:51:42");
+	
+	
+INSERT INTO `memorandumSent` (`title`,`message`,`receiver_id`,`time`) VALUES ("Vel Consulting","dolor, nonummy ac, feugiat non, lobortis quis, pede. Suspendisse dui.",1,"2021-06-21 07:24:20"),("Ipsum Cursus Foundation","Suspendisse eleifend. Cras sed leo. Cras vehicula aliquet libero. Integer",7,"2021-04-08 03:00:19"),("Nunc Commodo Auctor Company","risus odio, auctor vitae, aliquet nec, imperdiet nec, leo. Morbi",10,"2020-10-09 12:58:08"),("Facilisis Non LLP","amet ante. Vivamus non lorem vitae odio sagittis semper. Nam",7,"2022-07-30 06:25:53"),("Morbi Vehicula Corporation","metus. In lorem. Donec elementum, lorem ut aliquam iaculis, lacus",5,"2022-04-17 20:20:15"),("Mauris Inc.","vestibulum nec, euismod in, dolor. Fusce feugiat. Lorem ipsum dolor",7,"2021-09-15 04:05:33"),("Dictum Mi Ac LLC","lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate",10,"2020-11-01 04:30:30"),("Ut Sem Nulla Associates","id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend",2,"2020-09-20 22:46:40"),("Magnis Ltd","magnis dis parturient montes, nascetur ridiculus mus. Aenean eget magna.",1,"2021-08-20 01:43:22"),("Imperdiet Incorporated","non enim commodo hendrerit. Donec porttitor tellus non magna. Nam",2,"2020-12-24 04:18:11");
+
+	
