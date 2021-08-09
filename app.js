@@ -16,10 +16,17 @@ app.use(
 app.use(bodyParser.json());
 
 app.use(apiPrefix + "/users", require("./routes/user.route"));
-app.use(apiPrefix + "/paises", require("./routes/pais.route"));
+app.use(apiPrefix + "/countries", require("./routes/countries.route"));
 app.use(apiPrefix + "/login", require("./routes/login.route"));
 
-app.use(apiPrefix + "/memoreceived", require("./routes/memorandumRec.route"));
+app.use(
+  apiPrefix + "/memorandum/received",
+  require("./routes/memorandumRec.route")
+);
+app.use(
+  apiPrefix + "/memorandum/sent",
+  require("./routes/memorandumSent.route")
+);
 
 // add router in the Express app.
 app.use("/", router);
