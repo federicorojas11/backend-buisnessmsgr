@@ -13,7 +13,7 @@ const getById = async (req, res) => {
   const params = req.params;
   const CountriesId = params.id;
   const Countries = await CountriesService.getById(CountriesId);
-  console.log("response controller " + JSON.stringify(Countries));
+  //console.log("response controller " + JSON.stringify(Countries));
   return res.status(200).json(Countries);
 };
 

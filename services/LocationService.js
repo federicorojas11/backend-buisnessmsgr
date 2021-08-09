@@ -2,7 +2,7 @@ const error = require("../common/error");
 const exceptions = require("../common/exceptions");
 const CountryModel = require("../models/countryModel");
 
-const getAll = async ({ id, shortname, name }) => {
+const getAllCountries = async ({ id, shortname, name }) => {
   console.log(
     "getAll - nombre[" +
       name +
@@ -24,20 +24,20 @@ const getAll = async ({ id, shortname, name }) => {
     attributes: filterAtr,
     where: whereFilter,
   });
-  console.log("get user service " + countries);
+  //console.log("get user service " + countries);
   return countries;
 };
 
-const getById = async (paisId) => {
-  console.log("get by id service - paisId[" + paisId + "]");
-  const pais = await PaisModel.findByPk(paisId, {
-    attributes: ["nombre"],
+const getById = async (countryId) => {
+  console.log("get by id service - countryId[" + countryId + "]");
+  const country = await CountryModel.findByPk(countryId, {
+    attributes: ["name"],
   });
-  console.log("get user service " + pais);
-  if (!pais) {
-    throw new error.AppError(exceptions.exceptionType.paises.notFound);
+  console.log("get user service " + country);
+  if (!country) {
+    throw new error.AppError(exceptions.exceptionType.country.notFound);
   }
-  return pais;
+  return country;
 };
 
 const createPaises = async ({ nombre, poblacion }) => {
