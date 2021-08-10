@@ -13,7 +13,7 @@ const getAllCountries = async ({ id, shortname, name }) => {
       "]"
   );
   const whereFilter = {};
-  const filterAtr = ["name"];
+  const filterAtr = ["id", "name"];
 
   if (name) {
     whereFilter.name = name;
@@ -80,7 +80,7 @@ const actualizarPais = async (id, { nombre, poblacion }) => {
 
 module.exports = {
   createPaises,
-  getAll,
+  getAllCountries,
   getById,
   actualizarPais,
 };

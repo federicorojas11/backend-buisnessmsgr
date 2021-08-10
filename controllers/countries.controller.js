@@ -1,9 +1,13 @@
 const CountriesService = require("../services/CountriesService");
 
-const getAll = async (req, res) => {
+const getAllCountries = async (req, res) => {
   const { id, shortname, name } = req.query;
-  console.log("INIT GET paises:" + JSON.stringify({ id, shortname, name }));
-  const countries = await CountriesService.getAll({ id, shortname, name });
+  console.log("INIT GET countries:" + JSON.stringify({ id, shortname, name }));
+  const countries = await CountriesService.getAllCountries({
+    id,
+    shortname,
+    name,
+  });
   console.log("response controller " + JSON.stringify(countries));
   return res.status(200).json(countries);
 };
@@ -18,6 +22,6 @@ const getById = async (req, res) => {
 };
 
 module.exports = {
-  getAll,
+  getAllCountries,
   getById,
 };

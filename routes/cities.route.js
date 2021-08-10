@@ -1,15 +1,20 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const routeController = require("../common/route.controller");
-const CountriesController = require("../controllers/countries.controller");
+const CitiesController = require("../controllers/cities.controller");
 
+//obtener ciudades filtrados por paises
 router.get("/", (request, response) => {
-  routeController.handleRequest(request, response, CountriesController.getAll);
+  routeController.handleRequest(
+    request,
+    response,
+    CitiesController.getAllCities
+  );
 });
 
 router.get("/:id", (request, response) => {
   console.log("get by id route paises" + request.params);
-  routeController.handleRequest(request, response, CountriesController.getById);
+  routeController.handleRequest(request, response, CitiesController.getById);
 });
 
 router.post("/", (request, response) => {

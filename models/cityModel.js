@@ -26,4 +26,5 @@ const CityModel = sequelizeConnection.define(
     timestamps: false,
   }
 );
+
 module.exports = CityModel;
