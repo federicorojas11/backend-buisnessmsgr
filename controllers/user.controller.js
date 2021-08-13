@@ -36,10 +36,16 @@ const createUser = async (req, res) => {
     );
     throw new error.AppError(exceptions.exceptionType.badRequest);
   }
-
-  const newUser = await userService.createUser(data);
-  console.log(JSON.stringify(newUser));
-  return res.status(201).json(newUser);
+  if ((await userService.findUserByName(data)) == null) {
+    const newUser = await userService.createUser(data);
+    console.log(JSON.stringify(newUser));
+    return res.status(201).json(newUser);
+  } else {
+    throw new error.AppError(
+      exceptions.exceptionType.database.entity.canNotBeCreated,
+      "username already in use"
+    );
+  }
 };
 
 const login = async (req, res) => {

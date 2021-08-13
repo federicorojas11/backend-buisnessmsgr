@@ -68,14 +68,12 @@ const getById = async (userId) => {
 
 // obtener usuario por su username
 // returns User or null
-const findUserByName = async (username) => {
-  console.log("get by username [" + username + "]");
+const findUserByName = async (user) => {
+  console.log("get by username [" + user.userName + "]");
 
-  user = await UserModel.findOne({
-    where: { userName: username },
+  return await UserModel.findOne({
+    where: { userName: user.userName },
   });
-  console.log(user);
-  return user;
 };
 
 const login = async ({ userName, password }) => {
