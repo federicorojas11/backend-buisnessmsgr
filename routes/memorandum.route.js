@@ -4,8 +4,12 @@ const routeController = require("../common/route.controller");
 
 const memorandum = require("../controllers/memorandum.controller");
 
-router.get("/", (req, res) => {
-  routeController.handleRequest(req, res, memorandum.getAll);
+router.get("/received", (req, res) => {
+  routeController.handleRequest(req, res, memorandum.getAllReceivedByUserId);
+});
+
+router.get("/sent", (req, res) => {
+  routeController.handleRequest(req, res, memorandum.getAllSentByUserId);
 });
 
 router.get("/:id", (req, res) => {

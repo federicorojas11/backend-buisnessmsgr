@@ -1,18 +1,17 @@
 
+// Script for adding all countries and related cities on db for the app:
+
 CREATE TABLE countries (
   ID INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   ISO_ALPHA2 varchar(3) NOT NULL,
   NAME VARCHAR(80) NOT NULL
 );
 
-
 CREATE TABLE cities (
   ID INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   NAME VARCHAR(50) NOT NULL,
   COUNTRY_ID INT(6) NOT NULL
   );
-
-
 
 INSERT INTO countries (ID, ISO_ALPHA2, NAME) VALUES
 (1, 'AF', 'Afghanistan'),

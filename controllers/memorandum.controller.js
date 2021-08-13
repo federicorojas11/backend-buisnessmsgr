@@ -1,24 +1,40 @@
-const ProductService = require("../services/memorandumService");
+const MemorandumService = require("../services/memorandumService");
 const exceptions = require("../common/exceptions");
 const error = require("../common/error");
 
-const getAll = async (req, res) => {
+const getAllSentByUserId = async (req, res) => {
   const query = req.query;
   console.log("get all controller - query : " + JSON.stringify(query));
-  /*   if (!req.query.estado) {
-    throw new error.AppError(
-      exceptions.exceptionType.memorandum.memorandumNotFound,
-    );
-  } 
-  const filter = {
-    estado: req.query.estado,
-  };
-  if (req.query.nombre) {
-    filter.nombre = req.query.nombre;
-  }*/
 
-  //llamar al servicio de memorandum
-  const memorandums = await MemorandumService.getAllService(/* filter */);
+  // The user is "receiver = true"
+  // or is "sender = false"
+  const isReceiver = false;
+
+  if (!req.query.senderId & !req.query.receiverId) {
+    throw new error.AppError(
+      exceptions.exceptionType.memorandum.memorandumNotFound
+    );
+  }
+  const filter = req.query.senderId;
+  const memorandums = await MemorandumService.getAllService(filter, isReceiver);
+  res.status(200).json(memorandums);
+};
+
+const getAllReceivedByUserId = async (req, res) => {
+  const query = req.query;
+  console.log("get all controller - query : " + JSON.stringify(query));
+
+  // The user is "receiver = true"
+  // or is "sender = false"
+  const isReceiver = true;
+
+  if (!req.query.senderId & !req.query.receiverId) {
+    throw new error.AppError(
+      exceptions.exceptionType.memorandum.memorandumNotFound
+    );
+  }
+  const filter = req.query.receiverId;
+  const memorandums = await MemorandumService.getAllService(filter, isReceiver);
   res.status(200).json(memorandums);
 };
 
@@ -49,6 +65,8 @@ const actualizar = async (req, res) => {
 
 module.exports = {
   getAll,
+  getAllSentByUserId,
+  getAllReceivedByUserId,
   getById,
   create,
   actualizar,

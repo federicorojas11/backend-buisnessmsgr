@@ -1,15 +1,28 @@
 <---------					~~~						--------->
-// -> Script de creación de base de datos de la app con datos de prueba
 // -> Script for creating database with demo data for the app
+// (from line 26)
 
 
-//setting specific user to this proyect
-GRANT ALL PRIVILEGES ON *.* TO 'msgr_admin'@'localhost' IDENTIFIED BY 'tpicaro';
+//Optional: setting specific user to this proyect	--------->
+// after creating the database						--------->
+CREATE USER 'msgradmin'@'localhost' IDENTIFIED BY 'tpicaro';
+GRANT ALL PRIVILEGES ON BUISNESSMSGR TO 'msgradmin'@'localhost';
 \q
-mysql -u db_user -p
+mysql -u msgradmin -p
 tpicaro
 
-//creating database
+
+
+<-----------										----------->
+// Importante: Datos requeridos de las tablas countries y cities 
+// en el archivo "BASE DE DATOS TP ICARO - City & Country.txt"
+<-----------										----------->
+
+
+
+//creating database									----------->
+//		Script:			
+
 CREATE DATABASE BUISNESSMSGR;
 USE BUISNESSMSGR;
 CREATE TABLE memorandum
@@ -24,7 +37,6 @@ CREATE TABLE memorandum
 		TIME DATETIME NOT NULL, 
 		READED TINYINT(1) NOT NULL
 	);
-
 CREATE TABLE users
 	(
 		ID INT AUTO_INCREMENT PRIMARY KEY, 
@@ -37,27 +49,20 @@ CREATE TABLE users
 		CREATED_AT DATETIME NOT NULL,
 		UPDATED_AT DATETIME NOT NULL
 	);
-
 CREATE TABLE countries (
 		ID INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		ISO_ALPHA2 varchar(3) NOT NULL,
 		NAME VARCHAR(80) NOT NULL
 	);
-
-
 CREATE TABLE cities (
 		ID INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		NAME VARCHAR(50) NOT NULL,
 		COUNTRY_ID INT(6) NOT NULL
 	 );
-	 <-----------										----------->
-	// Importante: Datos requeridos de las tablas countries y cities 
-	// en el archivo "BASE DE DATOS TP ICARO - City & Country.txt"
-	<-----------										----------->
-
-//Insert demo data into database ()
 INSERT INTO `memorandum` (`TITLE`,`MESSAGE`,`SENDER_ID`,`SENDER_DEL_STATUS`,`RECEIVER_ID`,`RECEIVER_DEL_STATUS`,`TIME`,`READED`) VALUES ("Malesuada Institute","Vivamus euismod urna. Nullam lobortis quam a felis ullamcorper viverra.",9,0,8,0,"2021-12-08 01:08:33",0),("Quam Corporation","nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer sem",15,1,15,0,"2021-09-07 04:24:42",0),("Ultricies Sem Company","Donec tempor, est ac mattis semper, dui lectus rutrum urna,",4,0,1,0,"2020-10-22 07:35:25",0),("Posuere Cubilia Ltd","risus. Morbi metus. Vivamus euismod urna. Nullam lobortis quam a",2,1,13,0,"2022-03-03 23:11:10",0),("Ornare Associates","sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices",14,1,10,1,"2022-06-18 22:54:34",1),("Suscipit Corp.","tempus mauris erat eget ipsum. Suspendisse sagittis. Nullam vitae diam.",2,1,8,1,"2021-03-30 00:50:46",1),("Luctus Curabitur Egestas Industries","orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam ornare, libero",1,1,13,0,"2020-10-22 07:28:06",1),("Mi Limited","justo eu arcu. Morbi sit amet massa. Quisque porttitor eros",5,0,4,1,"2021-01-02 08:03:18",0),("Suspendisse Institute","conubia nostra, per inceptos hymenaeos. Mauris ut quam vel sapien",14,0,5,1,"2021-08-15 15:56:57",1),("Nulla Institute","dolor. Fusce feugiat. Lorem ipsum dolor sit amet, consectetuer adipiscing",9,0,4,1,"2020-11-12 00:33:35",1);
 INSERT INTO `memorandum` (`TITLE`,`MESSAGE`,`SENDER_ID`,`SENDER_DEL_STATUS`,`RECEIVER_ID`,`RECEIVER_DEL_STATUS`,`TIME`,`READED`) VALUES ("Phasellus Libero LLP","eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis",4,0,11,1,"2022-01-05 07:48:27",0),("Vitae Sodales Industries","id magna et ipsum cursus vestibulum. Mauris magna. Duis dignissim",8,0,14,1,"2020-12-22 04:53:56",0),("Luctus Ltd","molestie tellus. Aenean egestas hendrerit neque. In ornare sagittis felis.",12,1,6,1,"2020-11-12 21:42:56",1),("Mi Eleifend Egestas LLP","eu metus. In lorem. Donec elementum, lorem ut aliquam iaculis,",3,1,4,1,"2021-08-18 02:20:44",1),("Nec Company","nec, leo. Morbi neque tellus, imperdiet non, vestibulum nec, euismod",9,1,3,1,"2022-05-26 01:21:37",0),("Lectus Cum Sociis Incorporated","tellus faucibus leo, in lobortis tellus justo sit amet nulla.",14,1,10,1,"2020-10-15 12:19:19",0),("Interdum Curabitur Dictum PC","sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus",7,0,14,0,"2022-02-18 13:34:29",1),("Lobortis Tellus PC","ultricies dignissim lacus. Aliquam rutrum lorem ac risus. Morbi metus.",1,0,9,0,"2022-01-13 05:30:34",1),("Tempus Non Limited","nunc risus varius orci, in consequat enim diam vel arcu.",13,0,4,0,"2020-11-21 18:13:49",1),("Orci Luctus Industries","Nulla dignissim. Maecenas ornare egestas ligula. Nullam feugiat placerat velit.",8,1,13,0,"2022-06-06 20:00:53",0);
 INSERT INTO `users` (`USERNAME`,`PASSWORD`,`FIRSTNAME`,`LASTNAME`,`COUNTRY_ID`,`CITY_ID`,`CREATED_AT`,`UPDATED_AT`) VALUES ("Josiah","NFI73YTQ6DU","Jorden","Lindsey",35,600,"2022-03-30 08:36:48","2021-07-08 12:29:27"),("Derek","XRV88AZE0ZH","Brooke","Hopper",88,1498,"2022-01-18 05:44:05","2022-07-22 03:35:25"),("Kim","CQM55VGH9AE","Dexter","Frederick",50,1975,"2021-06-05 21:09:36","2021-12-25 17:32:45"),("Peter","SOO77ZRG2SA","Boris","Velasquez",181,1780,"2021-10-21 05:26:37","2021-08-13 00:52:47"),("Murphy","WUG87HTU0BK","Piper","Kane",53,2907,"2020-12-26 09:22:39","2021-06-22 21:29:46"),("Ivory","JIF71NLT1QX","Norman","Briggs",192,666,"2021-02-07 07:26:33","2021-09-14 01:29:19"),("Dorian","BIO78ENT0OL","Connor","Hopper",93,1014,"2022-01-02 15:55:04","2021-04-06 00:39:50"),("Athena","EJJ74GJS8HY","Kenyon","Willis",210,3964,"2021-06-25 13:32:12","2020-10-19 11:25:24"),("Hamish","ENL00NPN2NW","Britanney","Norris",156,2964,"2022-03-15 20:20:33","2021-09-26 19:09:31"),("Leila","ADI86SBA9PH","Nissim","Duncan",132,78,"2020-09-27 23:07:05","2020-11-23 08:24:30");
 INSERT INTO `users` (`USERNAME`,`PASSWORD`,`FIRSTNAME`,`LASTNAME`,`COUNTRY_ID`,`CITY_ID`,`CREATED_AT`,`UPDATED_AT`) VALUES ("McKenzie","XGT16KDU8IJ","Indigo","Mayo",32,2232,"2020-09-24 09:06:03","2021-11-29 21:20:38"),("Azalia","NPK45ROJ4FJ","Jameson","Hammond",206,3765,"2022-04-01 03:51:59","2020-09-12 19:00:43"),("Myra","EVM06MWG1AP","Chiquita","Washington",42,118,"2021-10-19 22:57:52","2020-11-07 21:23:45"),("Audra","OOF91HTB3EA","Jacqueline","Henderson",106,1627,"2021-10-11 18:58:27","2021-08-20 12:52:38"),("Kaseem","PRI11RCY6VU","Burton","Chaney",109,2759,"2021-01-22 06:42:00","2022-04-03 04:06:57");
+
+//	↑↑ Insert demo data into database ↑↑
 

@@ -1,6 +1,5 @@
 const Sequelize = require("sequelize");
 const { sequelizeConnection } = require("../config/server/sequelizeConfig");
-const constants = require("../common/constants");
 
 const MemorandumModel = sequelizeConnection.define(
   "memorandum",
@@ -45,17 +44,15 @@ const MemorandumModel = sequelizeConnection.define(
       type: Sequelize.DATE,
       allowNull: false,
       field: "time",
-      defaultValue: constants.estado.FALSE,
     },
     readed: {
       type: Sequelize.INTEGER,
       allowNull: false,
       field: "readed",
-      defaultValue: constants.estado.FALSE,
     },
   },
   {
-    tableName: "memorandumReceived",
+    tableName: "memorandum",
     timestamps: false,
   }
 );
