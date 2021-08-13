@@ -33,13 +33,9 @@ const exceptionType = {
       httpStatus: 400,
     },
   },
+
   // code of users 100
   users: {
-    invalidPassword: {
-      code: 100,
-      message: "Password did not match",
-      httpStatus: 401,
-    },
     cannotCreateUser: {
       code: 101,
       message: "User can not be created",
@@ -49,6 +45,21 @@ const exceptionType = {
       code: 102,
       message: "User not found",
       httpStatus: 404,
+    },
+    UserUnavailable: {
+      code: 101,
+      message: "User already in use",
+      httpStatus: 406,
+    },
+    invalidToken: {
+      code: 501,
+      message: "Invalid token",
+      httpStatus: 401,
+    },
+    requiredFields: {
+      code: 502,
+      message: "Required fields not found",
+      httpStatus: 400,
     },
   },
   database: {

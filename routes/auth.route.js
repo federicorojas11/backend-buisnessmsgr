@@ -8,9 +8,4 @@ router.post("/signin", (req, res) => {
   routeController.handleRequest(req, res, UserController.login);
 });
 
-router.post("/signup", (req, res) => {
-  console.log("post");
-  routeController.handleRequest(req, res, UserController.createUser);
-});
-
 module.exports = router;

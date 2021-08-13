@@ -11,7 +11,7 @@ CREATE TABLE cities (
   NAME VARCHAR(50) NOT NULL,
   COUNTRY_ID INT(6) NOT NULL
   );
-s
+
 
 
 INSERT INTO countries (ID, ISO_ALPHA2, NAME) VALUES
@@ -261,8 +261,6 @@ INSERT INTO countries (ID, ISO_ALPHA2, NAME) VALUES
 (244, 'YU', 'Yugoslavia'),
 (245, 'ZM', 'Zambia'),
 (246, 'ZW', 'Zimbabwe');
-
-
 
 INSERT INTO cities (ID, NAME, COUNTRY_ID) VALUES
 (1, 'Andaman and Nicobar Islands', 101),

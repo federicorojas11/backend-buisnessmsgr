@@ -1,7 +1,6 @@
 const userService = require("../services/UserService");
 const error = require("../common/error");
 const exceptions = require("../common/exceptions");
-const UserModel = require("../models/userModel");
 
 const getAll = async (req, res) => {
   const query = req.query;
@@ -42,7 +41,7 @@ const createUser = async (req, res) => {
     return res.status(201).json(newUser);
   } else {
     throw new error.AppError(
-      exceptions.exceptionType.database.entity.canNotBeCreated,
+      exceptions.exceptionType.users.UserUnavailable,
       "username already in use"
     );
   }
@@ -55,7 +54,10 @@ const login = async (req, res) => {
 
   if (!data.userName || !data.password) {
     console.log("no name in  CREATE USER  data:" + JSON.stringify(data));
-    throw new error.AppError(exceptions.exceptionType.badRequest);
+    throw (
+      (new error.AppError(exceptions.users.requiredFields),
+      "All fields are required")
+    );
   }
   res.json(userInfo);
 };

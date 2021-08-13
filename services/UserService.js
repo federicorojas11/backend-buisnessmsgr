@@ -31,7 +31,6 @@ const createUser = async ({
     return await UserModel.create(data);
   } catch (e) {
     const errorMessage = `Create User - Detail: ` + e.message;
-    // logger.error(errorMessage)
     console.error("createUser - userName[" + userName + "]");
     throw new error.AppError(
       exceptions.exceptionType.database.entity.canNotBeCreated,
@@ -86,7 +85,7 @@ const login = async ({ userName, password }) => {
   const isMatch = user && (await comparePass(password, user.password));
   if (!isMatch) {
     throw new error.AppError(
-      exceptions.exceptionType.users.invalidPassword,
+      exceptions.exceptionType.users.invalidToken,
       "userService.login"
     );
   }
