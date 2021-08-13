@@ -21,19 +21,20 @@ const exceptionType = {
       httpStatus: 404,
     },
   },
-  productos: {
-    notFound: {
-      code: 2000,
-      message: "Producto no se encuentra",
-      httpStatus: 404,
-    },
-    badRequest: {
-      code: 2001,
-      message: "faltan parametros obligatorios",
-      httpStatus: 400,
+  memorandum: {
+    memorandumNotFound: {
+      notFound: {
+        code: 2000,
+        message: "Memorando no se encuentra",
+        httpStatus: 404,
+      },
+      badRequest: {
+        code: 2001,
+        message: "faltan parametros obligatorios",
+        httpStatus: 400,
+      },
     },
   },
-
   // code of users 100
   users: {
     cannotCreateUser: {

@@ -31,15 +31,7 @@ app.use(apiPrefix + "/users", require("./routes/user.route"));
 app.use(apiPrefix + "/auth", require("./routes/auth.route"));
 app.use(apiPrefix + "/countries", require("./routes/countries.route"));
 app.use(apiPrefix + "/cities", require("./routes/cities.route"));
-
-app.use(
-  apiPrefix + "/memorandum/received",
-  require("./routes/memorandumRec.route")
-);
-app.use(
-  apiPrefix + "/memorandum/sent",
-  require("./routes/memorandumSent.route")
-);
+app.use(apiPrefix + "/memorandum", require("./routes/memorandum.route"));
 
 // add router in the Express app.
 app.use("/", router);

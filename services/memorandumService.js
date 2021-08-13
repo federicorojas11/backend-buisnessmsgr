@@ -1,4 +1,4 @@
-const memorandumSentModel = require("../models/memorandumSentModel");
+const memorandumModel = require("../models/memorandumModel");
 const error = require("../common/error");
 const exceptions = require("../common/exceptions");
 
@@ -11,7 +11,7 @@ const getAllService = async ({ nombre, estado }) => {
   if (nombre) {
     where.nombre = nombre;
   }
-  const memorandums = await memorandumSentModel.findAll({
+  const memorandums = await memorandumModel.findAll({
     attributes: ["id", "message"],
     where: where,
   });
@@ -21,7 +21,7 @@ const getAllService = async ({ nombre, estado }) => {
 
 const getById = async (id) => {
   console.log("getById - id: " + id);
-  const memorandum = await memorandumSentModel.findByPk(id);
+  const memorandum = await memorandumModel.findByPk(id);
   if (!memorandum) {
     throw new error.AppError(exceptions.exceptionType.productos.notFound);
   }
@@ -29,29 +29,28 @@ const getById = async (id) => {
   return memorandum;
 };
 
-/*  Esto va en memorandum sent model */
-/* const create = async (data) => {
+const create = async (data) => {
   const { title, message, estado } = data;
   console.log(
-    "Crear producto:" + JSON.stringify({ nombre, precio, categoria, estado })
+    "Crear memorandum:" + JSON.stringify({ nombre, precio, categoria, estado })
   );
-  const producto = await productosModel.create({
+  const memorandum = await memorandumModel.create({
     nombre,
     precio,
     categoria,
     estado,
   });
 
-  return producto.id;
-}; */
+  return memorandum.id;
+};
 
-/* const actualizar = async (id, data) => {
+const actualizar = async (id, data) => {
   const { nombre, precio, categoria, estado } = data;
   console.log(
-    "actualizar producto:" +
+    "actualizar memorandum:" +
       JSON.stringify({ nombre, precio, categoria, estado })
   );
-  const producto = await productosModel.update(
+  const memorandum = await memorandumModel.update(
     { estado },
     {
       where: {
@@ -59,15 +58,15 @@ const getById = async (id) => {
       },
     }
   );
-  if (!producto) {
+  if (!memorandum) {
     return false;
   }
   return true;
-}; */
+};
 
 module.exports = {
   getAllService,
   getById,
-  /* create,
-  actualizar, */
+  create,
+  actualizar,
 };

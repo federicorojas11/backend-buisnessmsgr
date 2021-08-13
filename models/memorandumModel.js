@@ -2,8 +2,8 @@ const Sequelize = require("sequelize");
 const { sequelizeConnection } = require("../config/server/sequelizeConfig");
 const constants = require("../common/constants");
 
-const MemorandumRecModel = sequelizeConnection.define(
-  "memorandumReceived",
+const MemorandumModel = sequelizeConnection.define(
+  "memorandum",
   {
     id: {
       type: Sequelize.INTEGER,
@@ -21,10 +21,25 @@ const MemorandumRecModel = sequelizeConnection.define(
       allowNull: true,
       field: "message",
     },
-    sender_id: {
+    senderId: {
       type: Sequelize.INTEGER,
       allowNull: true,
       field: "sender_id",
+    },
+    senderDelStatus: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      field: "sender_del_status",
+    },
+    receiverId: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      field: "receiver_id",
+    },
+    receiverDelStatus: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      field: "receiver_del_status",
     },
     time: {
       type: Sequelize.DATE,
@@ -44,4 +59,4 @@ const MemorandumRecModel = sequelizeConnection.define(
     timestamps: false,
   }
 );
-module.exports = MemorandumRecModel;
+module.exports = MemorandumModel;
