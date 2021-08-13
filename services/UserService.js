@@ -6,38 +6,6 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 // const logger = require('../config/server/logger')(__filename)
 
-/* const verifyUniqueUser = async ({
-  firstName,
-  lastName,
-  userName,
-  password,
-  country_id,
-  city_id,
-}) => {
-  const data = {
-    firstName: firstName,
-    lastName: lastName,
-    userName: userName.toLowerCase(),
-    password: encryptPassword(password),
-    country_id: country_id,
-    city_id: city_id,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-  await findUserByName(data.userName).then((findUser) => {
-    if (findUser == null) {
-      createUser(data);
-    } else {
-      const errorMessage = `Username is not available`;
-      console.error("createUser - userName[" + userName + "] already in use");
-      throw new error.AppError(
-        exceptions.exceptionType.database.entity.canNotBeCreated,
-        errorMessage
-      );
-    }
-  });
-};
- */
 const createUser = async ({
   firstName,
   lastName,
@@ -60,8 +28,7 @@ const createUser = async ({
   };
 
   try {
-    console.log("datos: " + data);
-    const userCreated = await UserModel.create(data);
+    return await UserModel.create(data);
   } catch (e) {
     const errorMessage = `Create User - Detail: ` + e.message;
     // logger.error(errorMessage)

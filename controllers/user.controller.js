@@ -37,12 +37,9 @@ const createUser = async (req, res) => {
     throw new error.AppError(exceptions.exceptionType.badRequest);
   }
 
-  // const newUser = await userService.verifyUniqueUser(data);
-  console.log("datos enviados:" + data.stringify);
-  await userService.createUser(data).then((x) => {
-    console.log(JSON.stringify(x));
-    return res.status(201).json(x);
-  });
+  const newUser = await userService.createUser(data);
+  console.log(JSON.stringify(newUser));
+  return res.status(201).json(newUser);
 };
 
 const login = async (req, res) => {
