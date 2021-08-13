@@ -1,3 +1,7 @@
+<---------					~~~						--------->
+// -> Script de creación de base de datos de la app con datos de prueba
+// -> Script for creating database with demo data for the app
+
 
 //setting specific user to this proyect
 GRANT ALL PRIVILEGES ON *.* TO 'msgr_admin'@'localhost' IDENTIFIED BY 'tpicaro';
