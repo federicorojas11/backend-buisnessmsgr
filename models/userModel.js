@@ -10,32 +10,35 @@ const UserModel = sequelizeConnection.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    userName: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      field: "user_name",
-    },
-    password: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
     firstName: {
       type: Sequelize.STRING,
       allowNull: false,
+      field: "firstname",
     },
     lastName: {
       type: Sequelize.STRING,
       allowNull: false,
+      field: "lastname",
     },
-    city: {
+    userName: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      field: "username",
+    },
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      field: "password",
+    },
+    country_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      field: "city",
+      field: "country_id",
     },
-    country: {
+    city_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      field: "country",
+      field: "city_id",
     },
     createdAt: {
       type: Sequelize.DATE,
@@ -47,7 +50,7 @@ const UserModel = sequelizeConnection.define(
     },
   },
   {
-    tableName: "user",
+    tableName: "users",
     timestamps: true,
   }
 );

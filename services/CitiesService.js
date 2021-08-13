@@ -22,6 +22,7 @@ const getAllCities = async ({ id, name, country_id }) => {
   if (country_id) {
     whereFilter.country_id = country_id;
   }
+
   console.log("getAll - whereFilter[" + whereFilter + "]");
 
   const cities = await CityModel.findAll({

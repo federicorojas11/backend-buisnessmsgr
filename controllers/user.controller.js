@@ -1,4 +1,7 @@
 const userService = require("../services/UserService");
+const error = require("../common/error");
+const exceptions = require("../common/exceptions");
+const UserModel = require("../models/userModel");
 
 const getAll = async (req, res) => {
   const query = req.query;
@@ -20,30 +23,39 @@ const getById = async (req, res) => {
 const createUser = async (req, res) => {
   const data = req.body;
   console.log("INIT CREATE USER  data:" + JSON.stringify(data));
-  if (!data.userName) {
-    console.log("no name in  CREATE USER  data:" + JSON.stringify(data));
-    return res.status(400).json();
+  if (
+    !data.firstName ||
+    !data.lastName ||
+    !data.userName ||
+    !data.password ||
+    !data.city_id ||
+    !data.country_id
+  ) {
+    console.log(
+      "empty value found in CREATE USER  data object:" + JSON.stringify(data)
+    );
+    throw new error.AppError(exceptions.exceptionType.badRequest);
   }
-  if (!data.password) {
-    console.log("no password in  CREATE USER  data:" + JSON.stringify(data));
-    return res.status(400).json();
-  }
-  if (!data.userName) {
-    console.log("no name in  CREATE USER  data:" + JSON.stringify(data));
-    return res.status(400).json();
-  }
-  const newUser = await userService.createUser(data);
-  console.log(JSON.stringify(newUser));
-  return res.status(201).json(newUser);
+
+  // const newUser = await userService.verifyUniqueUser(data);
+  console.log("datos enviados:" + data.stringify);
+  await userService.createUser(data).then((x) => {
+    console.log(JSON.stringify(x));
+    return res.status(201).json(x);
+  });
 };
 
 const login = async (req, res) => {
   const data = req.body;
   console.log("login - data:" + JSON.stringify(data));
   const userInfo = await userService.login(data);
+
+  if (!data.userName || !data.password) {
+    console.log("no name in  CREATE USER  data:" + JSON.stringify(data));
+    throw new error.AppError(exceptions.exceptionType.badRequest);
+  }
   res.json(userInfo);
 };
-
 module.exports = {
   createUser,
   getAll,
