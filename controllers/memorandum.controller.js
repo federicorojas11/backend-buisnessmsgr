@@ -64,7 +64,7 @@ const actualizar = async (req, res) => {
 };
 
 module.exports = {
-  getAll,
+
   getAllSentByUserId,
   getAllReceivedByUserId,
   getById,

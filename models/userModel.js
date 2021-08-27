@@ -30,12 +30,12 @@ const UserModel = sequelizeConnection.define(
       allowNull: false,
       field: "password",
     },
-    country_id: {
+    countryId: {
       type: Sequelize.INTEGER,
       allowNull: false,
       field: "country_id",
     },
-    city_id: {
+    cityId: {
       type: Sequelize.INTEGER,
       allowNull: false,
       field: "city_id",

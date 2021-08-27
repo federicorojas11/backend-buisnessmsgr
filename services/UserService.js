@@ -11,8 +11,8 @@ const createUser = async ({
   lastName,
   userName,
   password,
-  country_id,
-  city_id,
+  countryId,
+  cityId,
 }) => {
   // logger.info(`createUser - userName[${userName}]`)
   console.log("createUser - userName[" + userName + "]");
@@ -21,8 +21,8 @@ const createUser = async ({
     lastName: lastName,
     userName: userName.toLowerCase(),
     password: encryptPassword(password),
-    country_id: country_id,
-    city_id: city_id,
+    countryId: countryId,
+    cityId: cityId,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -82,6 +82,7 @@ const login = async ({ userName, password }) => {
   const user = await UserModel.findOne({
     where: { userName: userName.toLowerCase() },
   });
+
   const isMatch = user && (await comparePass(password, user.password));
   if (!isMatch) {
     throw new error.AppError(
