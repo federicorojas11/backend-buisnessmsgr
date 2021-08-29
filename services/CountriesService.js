@@ -40,6 +40,19 @@ const getById = async (countryId) => {
   return country;
 };
 
+const getIdByName = async (countryName) => {
+  console.log("get id  - countryId[" + countryName + "]");
+  const country = await CountryModel.findOne({
+    attributes: ["id"],
+    where: {name : countryName}
+  });
+  console.log("get user service " + country);
+  if (!country) {
+    throw new error.AppError(exceptions.exceptionType.country.notFound);
+  }
+  return country.id;
+};
+
 const createPaises = async ({ nombre, poblacion }) => {
   console.log("createPaises - nombre[" + nombre + "]");
   const data = {
@@ -82,5 +95,6 @@ module.exports = {
   createPaises,
   getAllCountries,
   getById,
+  getIdByName,
   actualizarPais,
 };

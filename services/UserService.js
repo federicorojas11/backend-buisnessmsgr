@@ -4,6 +4,8 @@ const UserModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const citiesService = require("./CitiesService")
+const countriesService = require("./CountriesService")
 // const logger = require('../config/server/logger')(__filename)
 
 const createUser = async ({
@@ -11,21 +13,22 @@ const createUser = async ({
   lastName,
   userName,
   password,
-  countryId,
-  cityId,
+  country,
+  city,
 }) => {
   // logger.info(`createUser - userName[${userName}]`)
   console.log("createUser - userName[" + userName + "]");
+
   const data = {
     firstName: firstName,
     lastName: lastName,
     userName: userName.toLowerCase(),
     password: encryptPassword(password),
-    countryId: countryId,
-    cityId: cityId,
+    countryId: await countriesService.getIdByName(country),
+    cityId: await citiesService.getIdByName(city),
     createdAt: new Date(),
     updatedAt: new Date(),
-  };
+  }
 
   try {
     return await UserModel.create(data);

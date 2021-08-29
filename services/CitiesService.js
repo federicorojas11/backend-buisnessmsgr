@@ -1,9 +1,8 @@
 const error = require("../common/error");
 const exceptions = require("../common/exceptions");
-const CountryModel = require("../models/countryModel");
 const CityModel = require("../models/cityModel");
 
-const getAllCities = async ({ id, name, country_id }) => {
+const getAllCities =  async ({ id, name, country_id }) => {
   console.log(
     "getAll - id[" +
       id +
@@ -14,14 +13,15 @@ const getAllCities = async ({ id, name, country_id }) => {
       "]"
   );
   const whereFilter = {};
-  const filterAtr = ["name"];
+  const filterAtr = ["name", "country_id"];
 
   if (name) {
     whereFilter.name = name;
   }
-  if (country_id) {
+/*   if (country_id) {
     whereFilter.country_id = country_id;
-  }
+  } */
+  whereFilter.country_id = 10;
 
   console.log("getAll - whereFilter[" + whereFilter + "]");
 
@@ -29,7 +29,6 @@ const getAllCities = async ({ id, name, country_id }) => {
     attributes: filterAtr,
     where: whereFilter,
   });
-  //console.log("get user service " + countries);
   return cities;
 };
 
@@ -45,7 +44,21 @@ const getById = async (cityId) => {
   return city;
 };
 
+const getIdByName = async (cityName) => {
+  console.log("get id  - cityId[" + cityName + "]");
+  const city = await CityModel.findOne({
+    attributes: ["id"],
+    where: {name : cityName, country_id: 10}
+  });
+  console.log("get user service " + city);
+  if (!city) {
+    throw new error.AppError(exceptions.exceptionType.city.notFound);
+  }
+  return city.id;
+};
+
 module.exports = {
   getAllCities,
   getById,
+  getIdByName
 };

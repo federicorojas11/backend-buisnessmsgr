@@ -27,8 +27,8 @@ const createUser = async (req, res) => {
     !data.lastName ||
     !data.userName ||
     !data.password ||
-    !data.cityId ||
-    !data.countryId
+    !data.city ||
+    !data.country
   ) {
     console.log(
       "empty value found in CREATE USER  data object:" + JSON.stringify(data)

@@ -1,4 +1,18 @@
 const exceptionType = {
+  
+  city: {
+   notFound: {
+    code: 300,
+    message: "City not found",
+    httpStatus: 404,
+  },
+  Country: {
+    notFound: {
+     code: 300,
+     message: "Country not found",
+     httpStatus: 404,
+   },
+  },
   unhandledException: {
     code: 200,
     message: "Unhandled exception",
@@ -72,7 +86,7 @@ const exceptionType = {
       },
     },
   },
-};
+}}
 
 module.exports = {
   exceptionType,
