@@ -5,6 +5,7 @@ const exceptionType = {
     code: 300,
     message: "City not found",
     httpStatus: 404,
+    },
   },
   Country: {
     notFound: {
@@ -86,7 +87,7 @@ const exceptionType = {
       },
     },
   },
-}}
+}
 
 module.exports = {
   exceptionType,
