@@ -6,8 +6,13 @@ const auth = require("../middlewares/auth")
 
 const memorandum = require("../controllers/memorandum.controller");
 
-router.get("/received",[auth.required], (req, res) => {
+router.get("/received", [auth.required], (req, res) => {
   routeController.handleRequest(req, res, memorandum.getAllReceivedByUserId);
+});
+
+router.get("/receivedbytoken",[auth.required], (req, res) => {
+  memorandum.getAllReceivedByUserToken(req, res);
+  // routeController.handleRequest(req, res, memorandum.getAllReceivedByUserToken(req, res));
 });
 
 router.get("/sent",[auth.required], (req, res) => {

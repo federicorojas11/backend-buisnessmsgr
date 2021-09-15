@@ -9,7 +9,7 @@ const required = (req, res, next) => {
     }
     // Pass user to req
     req.user = user;
-    return next();
+    return next(null, user);
   })(req, res, next);
 };
 

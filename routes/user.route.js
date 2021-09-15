@@ -39,8 +39,4 @@ router.post("/", (request, response) => {
   routeController.handleRequest(request, response, UserController.createUser);
 });
 
-router.get("/prueba", (request, response) => {
-  response.send("prueba");
-});
-
 module.exports = router;

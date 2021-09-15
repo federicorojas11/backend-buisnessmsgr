@@ -26,7 +26,7 @@ const createUser = async (req, res) => {
     !data.firstName ||
     !data.lastName ||
     !data.userName ||
-    !data.password ||
+    !data.password || 
     !data.city ||
     !data.country
   ) {
@@ -60,8 +60,7 @@ const login = async (req, res) => {
     );
   }
 
-  data.token = token;
-  res.json(data);
+  res.json(token);
 };
 
 

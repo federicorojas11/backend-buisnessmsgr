@@ -3,7 +3,8 @@ const router = express.Router({ mergeParams: true });
 const routeController = require("../common/route.controller");
 const UserController = require("../controllers/user.controller");
 
-router.post("/login", (req, res) => {
+
+router.post("/login",  (req, res) => {
   console.log("post");
   routeController.handleRequest(req, res, UserController.login);
 });

@@ -10,6 +10,8 @@ const createStrategy = () =>{
     secretOrKey: config.get('auth.secret'),
     passReqToCallback:true
     }
+
+    
     return new JwtStrategy(jwtOptions,(req,tokenPayload,next)=>{
         try{
             const user = {}
@@ -18,7 +20,7 @@ const createStrategy = () =>{
             if(!user){
                 return next(null,false)
             }
-            console.log(`passportConfig.createStrategy - user.id[${user.id}]`)
+            // console.log(`passportConfig.createStrategy - user.id[${user.id}]`)
             return next(null,user)
         }catch (e) {
             return next(e)

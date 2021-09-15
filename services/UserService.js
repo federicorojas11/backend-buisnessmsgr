@@ -81,7 +81,7 @@ const findUserByName = async (user) => {
 const login = async ({ userName, password }) => {
   console.log(
     "login - userName[" + userName + "]" + " - password[" + password + "]"
-  );
+  ); 
   const user = await UserModel.findOne({
     where: { userName: userName.toLowerCase() },
   });

@@ -28,14 +28,24 @@ const getAllReceivedByUserId = async (req, res) => {
   // or is "sender = false"
   const isReceiver = true;
 
-  if (!req.query.senderId & !req.query.receiverId) {
+  const filter = req.query.receiverId;
+  const memorandums = await MemorandumService.getAllService(filter, isReceiver);
+  res.status(200).json(memorandums);
+};
+
+const getAllReceivedByUserToken = async (req, res) => {
+console.log("req user: " + req.user);
+console.log("req id: " + req.user.id);
+
+
+ /*  if (!req.query.senderId & !req.query.receiverId) {
     throw new error.AppError(
       exceptions.exceptionType.memorandum.memorandumNotFound
     );
   }
   const filter = req.query.receiverId;
   const memorandums = await MemorandumService.getAllService(filter, isReceiver);
-  res.status(200).json(memorandums);
+  */ return res.status(200).json(req.user);/* .json(memorandums) */;
 };
 
 const getById = async (req, res) => {
@@ -67,6 +77,7 @@ module.exports = {
 
   getAllSentByUserId,
   getAllReceivedByUserId,
+  getAllReceivedByUserToken,
   getById,
   create,
   actualizar,
