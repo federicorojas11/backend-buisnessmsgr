@@ -36,16 +36,14 @@ const getAllReceivedByUserId = async (req, res) => {
 const getAllReceivedByUserToken = async (req, res) => {
 console.log("req user: " + req.user);
 console.log("req id: " + req.user.id);
-
-
- /*  if (!req.query.senderId & !req.query.receiverId) {
-    throw new error.AppError(
-      exceptions.exceptionType.memorandum.memorandumNotFound
-    );
+if (!req.user) {
+  throw new error.AppError(
+    exceptions.exceptionType.users.notFound
+  );
   }
-  const filter = req.query.receiverId;
-  const memorandums = await MemorandumService.getAllService(filter, isReceiver);
-  */ return res.status(200).json(req.user);/* .json(memorandums) */;
+  
+  const memorandums = await MemorandumService.getAllService(req.user.id);
+  return res.status(200).json(memorandums);
 };
 
 const getById = async (req, res) => {

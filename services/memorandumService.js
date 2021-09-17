@@ -2,17 +2,14 @@ const memorandumModel = require("../models/memorandumModel");
 const error = require("../common/error");
 const exceptions = require("../common/exceptions");
 
-const getAllService = async (userIdFilter, isReceiver) => {
+const getAllService = async (userId) => {
   console.log("getAllService - memorandum");
-
-  where = {};
-  isReceiver === true
-    ? (where = { receiverId: userIdFilter })
-    : (where = { senderId: userIdFilter });
 
   const memorandums = await memorandumModel.findAll({
     /* attributes: ["id", "message"], */
-    where: where,
+    where: {
+        receiver_id : userId
+    },
   });
   console.log("memo return : " + memorandums);
   return memorandums;
