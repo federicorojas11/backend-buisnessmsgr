@@ -2,18 +2,17 @@ const memorandumModel = require("../models/memorandumModel");
 const error = require("../common/error");
 const exceptions = require("../common/exceptions");
 
-const getAllService = async (userId) => {
+const getAllService = async (whereFilter) => {
   console.log("getAllService - memorandum");
 
   const memorandums = await memorandumModel.findAll({
     /* attributes: ["id", "message"], */
-    where: {
-        receiver_id : userId
-    },
+    where: whereFilter,
   });
   console.log("memo return : " + memorandums);
   return memorandums;
 };
+
 
 const getById = async (id) => {
   console.log("getById - id: " + id);
@@ -25,19 +24,17 @@ const getById = async (id) => {
   return memorandum;
 };
 
-const create = async (data) => {
-  const { title, message, estado } = data;
+const create = async (data, userId) => {
+  const { title, message, receiverId } = data;
+  const senderId = userId;
   console.log(
-    "Crear memorandum:" + JSON.stringify({ nombre, precio, categoria, estado })
+    "Crear memorandum:" + JSON.stringify({ userId, title, message, receiverId })
   );
   const memorandum = await memorandumModel.create({
-    nombre,
-    precio,
-    categoria,
-    estado,
-  });
+    title, message, senderId, receiverId
+  }); 
 
-  return memorandum.id;
+  return memorandum;
 };
 
 const actualizar = async (id, data) => {

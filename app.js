@@ -40,6 +40,6 @@ app.use("/", router);
 passport.use(passportConfig.createStrategy());
 app.use(passport.initialize());
 
-app.listen(3001, () => {
-  console.log("Started on PORT 3001");
+app.listen(3000, () => {
+  console.log("Started on PORT 3000");
 });

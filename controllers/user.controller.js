@@ -59,7 +59,8 @@ const login = async (req, res) => {
       "All fields are required")
     );
   }
-
+  console.log("User logged succesfully!");
+  
   res.json(token);
 };
 

@@ -2,47 +2,34 @@ const MemorandumService = require("../services/memorandumService");
 const exceptions = require("../common/exceptions");
 const error = require("../common/error");
 
-const getAllSentByUserId = async (req, res) => {
-  const query = req.query;
-  console.log("get all controller - query : " + JSON.stringify(query));
-
-  // The user is "receiver = true"
-  // or is "sender = false"
-  const isReceiver = false;
-
-  if (!req.query.senderId & !req.query.receiverId) {
-    throw new error.AppError(
-      exceptions.exceptionType.memorandum.memorandumNotFound
-    );
-  }
-  const filter = req.query.senderId;
-  const memorandums = await MemorandumService.getAllService(filter, isReceiver);
-  res.status(200).json(memorandums);
-};
-
-const getAllReceivedByUserId = async (req, res) => {
-  const query = req.query;
-  console.log("get all controller - query : " + JSON.stringify(query));
-
-  // The user is "receiver = true"
-  // or is "sender = false"
-  const isReceiver = true;
-
-  const filter = req.query.receiverId;
-  const memorandums = await MemorandumService.getAllService(filter, isReceiver);
-  res.status(200).json(memorandums);
-};
-
 const getAllReceivedByUserToken = async (req, res) => {
-console.log("req user: " + req.user);
-console.log("req id: " + req.user.id);
+// console.log("req user: " + req.user);
+console.log("get received memorandums from user: " + req.user.id);
 if (!req.user) {
   throw new error.AppError(
     exceptions.exceptionType.users.notFound
   );
   }
+  userId = req.user.id; 
+  whereFilter = { receiver_id : userId }
   
-  const memorandums = await MemorandumService.getAllService(req.user.id);
+  const memorandums = await MemorandumService.getAllService(whereFilter);
+  console.log("Response: " + memorandums );
+  return res.status(200).json(memorandums);
+};
+
+const getAllSentByUserToken = async (req, res) => {
+// console.log("req user: " + req.user);
+console.log("get sent memorandums from user: " + req.user.id);
+if (!req.user) {
+  throw new error.AppError(
+    exceptions.exceptionType.users.notFound
+  );
+  }
+  userId = req.user.id; 
+  whereFilter = { sender_id : userId }
+  
+  const memorandums = await MemorandumService.getAllService(whereFilter);
   return res.status(200).json(memorandums);
 };
 
@@ -55,10 +42,18 @@ const getById = async (req, res) => {
 };
 
 const create = async (req, res) => {
+  if (!req.user) {
+    throw new error.AppError(
+      exceptions.exceptionType.users.notFound
+    );
+    }
+
   const data = req.body;
-  console.log("create controller - body : " + JSON.stringify(data));
-  const memorandumId = await MemorandumService.create(data);
-  res.status(201).json({ memorandumId });
+  const userId = req.user.id;
+
+  console.log("create memorandum controller \nuser " + req.user.userName + '\ndata:' + JSON.stringify(data));
+  const memorandum = await MemorandumService.create(data, userId);
+  return res.status(201).json({ memorandum });   
 };
 
 const actualizar = async (req, res) => {
@@ -73,8 +68,7 @@ const actualizar = async (req, res) => {
 
 module.exports = {
 
-  getAllSentByUserId,
-  getAllReceivedByUserId,
+  getAllSentByUserToken,
   getAllReceivedByUserToken,
   getById,
   create,
