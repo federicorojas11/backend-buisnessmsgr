@@ -24,11 +24,11 @@ const getById = async (id) => {
   return memorandum;
 };
 
-const create = async (data, userId) => {
-  const { title, message, receiverId } = data;
-  const senderId = userId;
+const create = async (message,title, receiverId, senderId) => {
+  // const { title, message, receiverId } = data;
+  // const senderId = userId;
   console.log(
-    "Crear memorandum:" + JSON.stringify({ userId, title, message, receiverId })
+    "Crear memorandum:" + JSON.stringify({ senderId, title, message, receiverId })
   );
   const memorandum = await memorandumModel.create({
     title, message, senderId, receiverId

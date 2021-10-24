@@ -1,4 +1,5 @@
 const MemorandumService = require("../services/memorandumService");
+const UserService = require("../services/UserService")
 const exceptions = require("../common/exceptions");
 const error = require("../common/error");
 
@@ -14,8 +15,9 @@ if (!req.user) {
   whereFilter = { receiver_id : userId }
   
   const memorandums = await MemorandumService.getAllService(whereFilter);
+ 
   console.log("Response: " + memorandums );
-  return res.status(200).json(memorandums);
+  return res.status(200).json(memorandums).lenght;
 };
 
 const getAllSentByUserToken = async (req, res) => {
@@ -46,13 +48,19 @@ const create = async (req, res) => {
     throw new error.AppError(
       exceptions.exceptionType.users.notFound
     );
-    }
+    } 
 
-  const data = req.body;
+  let receiverId = 0 ;
   const userId = req.user.id;
 
-  console.log("create memorandum controller \nuser " + req.user.userName + '\ndata:' + JSON.stringify(data));
-  const memorandum = await MemorandumService.create(data, userId);
+  await UserService.findUserIdByName(req.body.params.userName).then(user =>{
+    console.log(user);
+    receiverId = user.id;;
+  })
+  
+
+  console.log("create memorandum controller \nuser " + receiverId + '\ndata:' + JSON.stringify(req.body.params));
+  const memorandum = await MemorandumService.create(req.body.params.message, req.body.params.title, receiverId, userId);
   return res.status(201).json({ memorandum });   
 };
 

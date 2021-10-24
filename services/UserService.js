@@ -78,6 +78,16 @@ const findUserByName = async (user) => {
   });
 };
 
+// obtener usuer id por su username
+const findUserIdByName = async (username) => {
+  console.log("get by username [" + username + "]");
+
+  return await UserModel.findOne({
+    atributes:["id"],
+    where: { userName: username },
+  });
+};
+
 const login = async ({ userName, password }) => {
   console.log(
     "login - userName[" + userName + "]" + " - password[" + password + "]"
@@ -113,6 +123,7 @@ const generateToken = (id, userName) => {
 module.exports = {
   createUser,
   findUserByName,
+  findUserIdByName,
   // verifyUniqueUser,
   getAll,
   getById,

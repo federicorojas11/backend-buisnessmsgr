@@ -2,15 +2,14 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 const UserController = require("../controllers/user.controller");
 const routeController = require("../common/route.controller");
-const authorization = require("../middlewares/auth");
+const auth = require("../middlewares/auth");
 
-router.get("/", (request, response) => {
-  console.log(request.query);
+router.get("/", [auth.required], (request, response) => {
   routeController.handleRequest(request, response, UserController.getAll);
 });
 
 router.get("/:id", (request, response) => {
-  console.log("get bt id route" + request.params);
+  console.log("get by id route" + request.params);
   routeController.handleRequest(request, response, UserController.getById);
 });
 

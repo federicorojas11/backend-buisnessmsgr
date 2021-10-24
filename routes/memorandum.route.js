@@ -8,12 +8,10 @@ const memorandum = require("../controllers/memorandum.controller");
 
 router.get("/received",[auth.required], (req, res) => {
   memorandum.getAllReceivedByUserToken(req, res);
-  // routeController.handleRequest(req, res, memorandum.getAllReceivedByUserToken([auth.required]));
 });
 
 router.get("/sent",[auth.required], (req, res) => {
   memorandum.getAllSentByUserToken(req, res);
- // routeController.handleRequest(req, res, memorandum.getAllReceivedByUserToken([auth.required]));
 });
 
 router.patch("/:id", [auth.required], (req, res) => {
@@ -24,7 +22,7 @@ router.get("/:id", [auth.required], (req, res) => {
   routeController.handleRequest(req, res, memorandum.getById);
 });
 
-router.post("/", [auth.required], (req, res) => {
+router.post("/new", [auth.required], (req, res) => {
   routeController.handleRequest(req, res, memorandum.create);
 });
 
