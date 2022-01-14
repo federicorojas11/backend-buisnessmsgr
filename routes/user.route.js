@@ -4,7 +4,7 @@ const UserController = require("../controllers/user.controller");
 const routeController = require("../common/route.controller");
 const auth = require("../middlewares/auth");
 
-router.get("/", [auth.required], (request, response) => {
+router.get("/", (request, response) => {
   routeController.handleRequest(request, response, UserController.getAll);
 });
 

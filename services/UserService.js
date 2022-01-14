@@ -4,9 +4,8 @@ const UserModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const citiesService = require("./CitiesService")
-const countriesService = require("./CountriesService")
-// const logger = require('../config/server/logger')(__filename)
+const citiesService = require("./CitiesService");
+const countriesService = require("./CountriesService");
 
 const createUser = async ({
   firstName,
@@ -28,7 +27,7 @@ const createUser = async ({
     cityId: await citiesService.getIdByName(city),
     createdAt: new Date(),
     updatedAt: new Date(),
-  }
+  };
 
   try {
     return await UserModel.create(data);
@@ -78,12 +77,12 @@ const findUserByName = async (user) => {
   });
 };
 
-// obtener usuer id por su username
+// obtener user id por su username
 const findUserIdByName = async (username) => {
   console.log("get by username [" + username + "]");
 
   return await UserModel.findOne({
-    atributes:["id"],
+    atributes: ["id"],
     where: { userName: username },
   });
 };
@@ -91,7 +90,7 @@ const findUserIdByName = async (username) => {
 const login = async ({ userName, password }) => {
   console.log(
     "login - userName[" + userName + "]" + " - password[" + password + "]"
-  ); 
+  );
   const user = await UserModel.findOne({
     where: { userName: userName.toLowerCase() },
   });
@@ -124,7 +123,6 @@ module.exports = {
   createUser,
   findUserByName,
   findUserIdByName,
-  // verifyUniqueUser,
   getAll,
   getById,
   login,

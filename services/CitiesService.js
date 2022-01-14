@@ -49,7 +49,7 @@ const getIdByName = async (cityName) => {
   console.log("get id  - cityId[" + cityName + "]");
   const city = await CityModel.findOne({
     attributes: ["id"],
-    where: { name: cityName, country_id: 10 },
+    where: { name: cityName },
   });
   console.log("get user service " + city);
   if (!city) {

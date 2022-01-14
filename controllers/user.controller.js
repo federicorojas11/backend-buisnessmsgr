@@ -8,7 +8,7 @@ const getAll = async (req, res) => {
   const users = await userService.getAll(query);
   console.log("response controller " + JSON.stringify(users));
   return res.status(200).json(users);
-};   
+};
 
 const getById = async (req, res) => {
   console.log(req.params);
@@ -26,7 +26,7 @@ const createUser = async (req, res) => {
     !data.firstName ||
     !data.lastName ||
     !data.userName ||
-    !data.password || 
+    !data.password ||
     !data.city ||
     !data.country
   ) {
@@ -53,18 +53,15 @@ const login = async (req, res) => {
   const token = await userService.login(data);
 
   if (!data.userName || !data.password) {
-    console.log("no name in  CREATE USER  data:" + JSON.stringify(data));
+    console.log("Missing fields:" + JSON.stringify(data));
     throw (
       (new error.AppError(exceptions.users.requiredFields),
       "All fields are required")
     );
   }
   console.log("User logged succesfully!");
-  
   res.json(token);
 };
-
-
 
 module.exports = {
   createUser,
